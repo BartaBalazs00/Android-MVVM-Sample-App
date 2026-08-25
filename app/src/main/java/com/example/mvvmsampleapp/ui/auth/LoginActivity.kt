@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onSuccess(loginResponse: LiveData<String>) {
-
         loginResponse.observe(this, Observer {
             binding.progressBar.hide()
             toast(it)
