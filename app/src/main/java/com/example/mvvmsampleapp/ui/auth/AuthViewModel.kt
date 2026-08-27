@@ -2,7 +2,9 @@ package com.example.mvvmsampleapp.ui.auth
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.example.mvvmsampleapp.data.db.entities.User
 import com.example.mvvmsampleapp.data.repositories.UserRepository
+import com.example.mvvmsampleapp.util.Coroutines
 
 class AuthViewModel: ViewModel() {
 
@@ -18,7 +20,30 @@ class AuthViewModel: ViewModel() {
             return
         }
 
-        val loginResponse = UserRepository().userLogin(email!!, password!!)
-        authListener?.onSuccess(loginResponse)
+        Coroutines.main {
+            val response = UserRepository().userLogin(email!!, password!!)
+            if (response.isSuccessful) {
+                val authResponse = response.body()
+                if (authResponse != null) {
+                    val user = User(
+                        authResponse.id,
+                        authResponse.username,
+                        authResponse.email,
+                        authResponse.firstName,
+                        authResponse.lastName,
+                        authResponse.gender,
+                        authResponse.image,
+                        authResponse.accessToken,
+                        authResponse.refreshToken
+                    )
+                    authListener?.onSuccess(user)
+                } else {
+                    authListener?.onFailure("Login failed")
+                }
+            } else {
+                authListener?.onFailure("Error Code: ${response.code()}")
+            }
+        }
+
     }
 }
