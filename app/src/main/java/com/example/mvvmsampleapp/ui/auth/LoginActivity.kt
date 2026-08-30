@@ -12,6 +12,7 @@ import com.example.mvvmsampleapp.data.db.entities.User
 import com.example.mvvmsampleapp.databinding.ActivityLoginBinding
 import com.example.mvvmsampleapp.util.hide
 import com.example.mvvmsampleapp.util.show
+import com.example.mvvmsampleapp.util.snackbar
 import com.example.mvvmsampleapp.util.toast
 
 class LoginActivity : AppCompatActivity(), AuthListener {
@@ -35,11 +36,13 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     override fun onSuccess(user: User) {
         binding.progressBar.hide()
-        toast("${user.username} is logged in")
+        binding.root.snackbar("${user.username} is logged in")
+        //toast("${user.username} is logged in")
     }
 
     override fun onFailure(message: String) {
         binding.progressBar.hide()
-        toast(message)
+        binding.logIn.snackbar(message)
+        //toast(message)
     }
 }
