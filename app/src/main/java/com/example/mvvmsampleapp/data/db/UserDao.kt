@@ -12,7 +12,7 @@ import com.example.mvvmsampleapp.data.db.entities.User
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(user: User): Long
+    suspend fun upsert(user: User): @JvmSuppressWildcards Long
 
     @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
     fun getUser(): LiveData<User>
