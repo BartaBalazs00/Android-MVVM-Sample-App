@@ -6,6 +6,7 @@ import com.example.mvvmsampleapp.data.db.entities.User
 import com.example.mvvmsampleapp.data.repositories.UserRepository
 import com.example.mvvmsampleapp.util.ApiException
 import com.example.mvvmsampleapp.util.Coroutines
+import com.example.mvvmsampleapp.util.NoInternetException
 
 class AuthViewModel(
     private val repository: UserRepository
@@ -41,6 +42,8 @@ class AuthViewModel(
                repository.saveUser(user)
                authListener?.onSuccess(user)
            }catch (e: ApiException){
+               authListener?.onFailure(e.message!!)
+           }catch (e: NoInternetException){
                authListener?.onFailure(e.message!!)
            }
         }
