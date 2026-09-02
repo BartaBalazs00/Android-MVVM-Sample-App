@@ -1,161 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/signUp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#EAEAEA"
-    tools:context=".ui.auth.SignUpActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.mvvmsampleapp.ui.auth.AuthViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/signUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="#EAEAEA"
+        tools:context=".ui.auth.SignUpActivity">
 
-        <!-- Felirat: architect your app with (A szülő tetejéhez igazítva, mivel a logó kikerült) -->
-        <TextView
-            android:id="@+id/textViewSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:fontFamily="cursive"
-            android:text="architect your app with"
-            android:textColor="#757575"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- MVVM Cím -->
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="MVVM"
-            android:textColor="#9C89FF"
-            android:textSize="36sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewSubtitle" />
-
-        <!-- Fehér doboz (CardView) az űrlapnak -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewForm"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle">
+            android:padding="24dp">
 
-            <LinearLayout
+            <!-- Felirat: architect your app with (A szülő tetejéhez igazítva, mivel a logó kikerült) -->
+            <TextView
+                android:id="@+id/textViewSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:fontFamily="cursive"
+                android:text="architect your app with"
+                android:textColor="#757575"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- MVVM Cím -->
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="MVVM"
+                android:textColor="#9C89FF"
+                android:textSize="36sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSubtitle" />
+
+            <!-- Fehér doboz (CardView) az űrlapnak -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
-                <!-- Név mező -->
-                <EditText
-                    android:id="@+id/editTextName"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#F0F0F0"
-                    android:hint="Belal Khan"
-                    android:inputType="textPersonName"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textColorHint="#9E9E9E"
-                    android:textSize="14sp" />
-
-                <!-- Email mező -->
-                <EditText
-                    android:id="@+id/editTextEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#F0F0F0"
-                    android:hint="belal@gmail.com"
-                    android:inputType="textEmailAddress"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textColorHint="#9E9E9E"
-                    android:textSize="14sp" />
-
-                <!-- Jelszó mező -->
-                <EditText
-                    android:id="@+id/editTextPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#F0F0F0"
-                    android:hint="password"
-                    android:inputType="textPassword"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textColorHint="#9E9E9E"
-                    android:textSize="14sp" />
-
-                <!-- Jelszó megerősítése mező -->
-                <EditText
-                    android:id="@+id/editTextConfirmPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="#F0F0F0"
-                    android:hint="confirm password"
-                    android:inputType="textPassword"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textColorHint="#9E9E9E"
-                    android:textSize="14sp" />
-
-                <!-- Elfelejtett jelszó -->
-                <TextView
-                    android:id="@+id/textViewForgetPassword"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Forget Password?"
-                    android:textColor="#3A7E82"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <!-- Gomb -->
-                <Button
-                    android:id="@+id/buttonSignUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:backgroundTint="#D1D1D1"
-                    android:text="Sign Up"
-                    android:textAllCaps="false"
-                    android:textColor="#000000" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    <!-- Név mező -->
+                    <EditText
+                        android:text="@={viewmodel.firstName}"
+                        android:id="@+id/editTextFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F0F0F0"
+                        android:hint="First Name"
+                        android:inputType="textPersonName"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="14sp" />
+                    <EditText
+                        android:text="@={viewmodel.lastName}"
+                        android:id="@+id/editTextLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F0F0F0"
+                        android:hint="Last Name"
+                        android:inputType="textPersonName"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="14sp" />
 
-        <!-- Alsó szöveg (Nincs még fiókod?) -->
-        <TextView
-            android:id="@+id/textViewLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="center"
-            android:text="Already have an account?\nLogin Here"
-            android:textColor="#3A7E82"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewForm"
-            app:layout_constraintVertical_bias="0.0" />
+                    <!-- Email mező -->
+                    <EditText
+                        android:text="@={viewmodel.email}"
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F0F0F0"
+                        android:hint="email"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="14sp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                    <!-- Jelszó mező -->
+                    <EditText
+                        android:text="@={viewmodel.password}"
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F0F0F0"
+                        android:hint="password"
+                        android:inputType="textPassword"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="14sp" />
+
+                    <!-- Jelszó megerősítése mező -->
+                    <EditText
+                        android:text="@={viewmodel.passwordConfirm}"
+                        android:id="@+id/editTextConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F0F0F0"
+                        android:hint="confirm password"
+                        android:inputType="textPassword"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:textColorHint="#9E9E9E"
+                        android:textSize="14sp" />
+
+                    <!-- Elfelejtett jelszó -->
+                    <TextView
+                        android:id="@+id/textViewForgetPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Forget Password?"
+                        android:textColor="#3A7E82"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <!-- Gomb -->
+                    <Button
+                        android:id="@+id/buttonSignUp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:backgroundTint="#D1D1D1"
+                        android:text="Sign Up"
+                        android:onClick="@{viewmodel::onSignupButtonClick}"
+                        android:textAllCaps="false"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Alsó szöveg (Nincs még fiókod?) -->
+            <TextView
+                android:id="@+id/textViewLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:onClick="@{viewmodel::onLogin}"
+                android:text="Already have an account?\nLogin Here"
+                android:textColor="#3A7E82"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewForm"
+                app:layout_constraintVertical_bias="0.0" />
+            <ProgressBar
+                android:elevation="@android:dimen/app_icon_size"
+                android:visibility="invisible"
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

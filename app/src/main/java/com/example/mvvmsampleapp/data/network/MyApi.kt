@@ -1,6 +1,7 @@
 package com.example.mvvmsampleapp.data.network
 
 import com.example.mvvmsampleapp.data.network.responses.AuthResponse
+import com.example.mvvmsampleapp.data.network.responses.SignupResponse
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -14,12 +15,20 @@ import retrofit2.http.POST
 
 interface MyApi {
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     suspend fun userLogin(
         @Field("username")email: String,
         @Field("password")password: String,
     ) : Response<AuthResponse>
 
+    @FormUrlEncoded
+    @POST("users/add")
+    suspend fun userSignup(
+        @Field("firstName") firstName: String,
+        @Field("lastName") lastName: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+    ) : Response<SignupResponse>
     companion object{
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor
@@ -31,7 +40,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://dummyjson.com/auth/")
+                .baseUrl("https://dummyjson.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)
