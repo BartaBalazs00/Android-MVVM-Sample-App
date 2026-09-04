@@ -6,6 +6,7 @@ import com.example.mvvmsampleapp.data.network.MyApi
 import com.example.mvvmsampleapp.data.network.NetworkConnectionInterceptor
 import com.example.mvvmsampleapp.data.repositories.UserRepository
 import com.example.mvvmsampleapp.ui.auth.AuthViewModelFactory
+import com.example.mvvmsampleapp.ui.home.profile.ProfileViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -22,5 +23,7 @@ class MVVMApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }
         bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { ProfileViewModelFactory(instance()) }
+
     }
 }

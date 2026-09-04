@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.mvvmsampleapp.ui.home.profile.ProfileFragment"
-        android:label="profile_fragment"
+        android:label="MVVM Sample App"
         tools:layout="@layout/profile_fragment" />
 </navigation>
