@@ -1,6 +1,7 @@
 package com.example.mvvmsampleapp.data.network
 
 import com.example.mvvmsampleapp.data.network.responses.AuthResponse
+import com.example.mvvmsampleapp.data.network.responses.QuotesResponse
 import com.example.mvvmsampleapp.data.network.responses.SignupResponse
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -11,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MyApi {
@@ -29,6 +31,10 @@ interface MyApi {
         @Field("email") email: String,
         @Field("password") password: String,
     ) : Response<SignupResponse>
+
+    @GET("quotes")
+    suspend fun getQuotes() : Response<QuotesResponse>
+
     companion object{
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor
