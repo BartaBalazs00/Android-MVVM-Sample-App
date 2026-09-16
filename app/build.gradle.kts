@@ -103,4 +103,6 @@ dependencies {
     implementation("com.github.lisawray.groupie:groupie:2.10.1")
     implementation("com.github.lisawray.groupie:groupie-databinding:2.10.1")
 
+    implementation("androidx.preference:preference:1.2.1")
+
 }
