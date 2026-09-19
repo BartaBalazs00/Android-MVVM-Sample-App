@@ -46,6 +46,9 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
         binding.btnSignIn.setOnClickListener {
             loginUser()
         }
+        binding.tvSignUp.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+        }
     }
 
     private fun loginUser() {
@@ -73,10 +76,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
             }
             catch (e: ApiException){
                 binding.logIn.snackbar(e.message!!)
-                //e.printStackTrace()
+                e.printStackTrace()
             } catch (e: NoInternetException){
                 binding.logIn.snackbar(e.message!!)
-                //e.printStackTrace()
+                e.printStackTrace()
             }
         }
     }
