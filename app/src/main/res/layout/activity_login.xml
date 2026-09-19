@@ -4,11 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.mvvmsampleapp.ui.auth.AuthViewModel" />
-    </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logIn"
@@ -79,7 +75,6 @@
 
                 <!-- Email mező -->
                 <EditText
-                    android:text="@={viewmodel.email}"
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -95,7 +90,6 @@
 
                 <!-- Jelszó mező -->
                 <EditText
-                    android:text="@={viewmodel.password}"
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -123,7 +117,6 @@
 
                 <!-- Bejelentkezés gomb -->
                 <Button
-                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:id="@+id/btnSignIn"
                     android:layout_width="140dp"
                     android:layout_height="40dp"
@@ -159,7 +152,6 @@
             <TextView
                 android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
-                android:onClick="@{viewmodel::onSignup}"
                 android:layout_height="wrap_content"
                 android:text="Sign Up Here"
                 android:textColor="#2E6B5E"

@@ -5,12 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.mvvmsampleapp.ui.auth.AuthViewModel" />
-    </data>
-
     <ScrollView
         android:id="@+id/signUp"
         android:layout_width="match_parent"
@@ -72,7 +66,6 @@
 
                     <!-- Név mező -->
                     <EditText
-                        android:text="@={viewmodel.firstName}"
                         android:id="@+id/editTextFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -85,7 +78,6 @@
                         android:textColorHint="#9E9E9E"
                         android:textSize="14sp" />
                     <EditText
-                        android:text="@={viewmodel.lastName}"
                         android:id="@+id/editTextLastName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -100,7 +92,6 @@
 
                     <!-- Email mező -->
                     <EditText
-                        android:text="@={viewmodel.email}"
                         android:id="@+id/editTextEmail"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -115,7 +106,6 @@
 
                     <!-- Jelszó mező -->
                     <EditText
-                        android:text="@={viewmodel.password}"
                         android:id="@+id/editTextPassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -130,7 +120,6 @@
 
                     <!-- Jelszó megerősítése mező -->
                     <EditText
-                        android:text="@={viewmodel.passwordConfirm}"
                         android:id="@+id/editTextConfirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -162,7 +151,6 @@
                         android:layout_gravity="center_horizontal"
                         android:backgroundTint="#D1D1D1"
                         android:text="Sign Up"
-                        android:onClick="@{viewmodel::onSignupButtonClick}"
                         android:textAllCaps="false"
                         android:textColor="#000000" />
                 </LinearLayout>
@@ -176,7 +164,6 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
-                android:onClick="@{viewmodel::onLogin}"
                 android:text="Already have an account?\nLogin Here"
                 android:textColor="#3A7E82"
                 android:textSize="16sp"

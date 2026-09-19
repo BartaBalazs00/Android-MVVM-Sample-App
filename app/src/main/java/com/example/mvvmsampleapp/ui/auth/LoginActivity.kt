@@ -6,32 +6,34 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.mvvmsampleapp.R
 import com.example.mvvmsampleapp.data.db.entities.User
 import com.example.mvvmsampleapp.databinding.ActivityLoginBinding
 import com.example.mvvmsampleapp.ui.home.HomeActivity
+import com.example.mvvmsampleapp.util.ApiException
+import com.example.mvvmsampleapp.util.NoInternetException
 import com.example.mvvmsampleapp.util.hide
 import com.example.mvvmsampleapp.util.show
 import com.example.mvvmsampleapp.util.snackbar
+import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+class LoginActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: AuthViewModelFactory by instance()
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var viewModel: AuthViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-
-        val viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
-
-        binding.viewmodel = viewModel
-
-        viewModel.authListener = this
+        viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
             if (user != null) {
@@ -41,21 +43,41 @@ class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
                 }
             }
         })
+        binding.btnSignIn.setOnClickListener {
+            loginUser()
+        }
     }
 
-    override fun onStarted() {
-        binding.progressBar.show()
-    }
+    private fun loginUser() {
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
 
-    override fun onSuccess(user: User) {
-        binding.progressBar.hide()
-        //binding.root.snackbar("${user.username} is logged in")
-        //toast("${user.username} is logged in")
-    }
+        //validation todo
 
-    override fun onFailure(message: String) {
-        binding.progressBar.hide()
-        binding.logIn.snackbar(message)
-        //toast(message)
+        lifecycleScope.launch {
+            try {
+                val authResponse= viewModel.userLogin(email!!, password!!)
+                val user = User(
+                    authResponse.id,
+                    authResponse.username,
+                    authResponse.email,
+                    authResponse.firstName,
+                    authResponse.lastName,
+                    authResponse.gender,
+                    authResponse.image,
+                    authResponse.accessToken,
+                    authResponse.refreshToken
+                )
+
+                viewModel.saveLoggedInUser(user)
+            }
+            catch (e: ApiException){
+                binding.logIn.snackbar(e.message!!)
+                //e.printStackTrace()
+            } catch (e: NoInternetException){
+                binding.logIn.snackbar(e.message!!)
+                //e.printStackTrace()
+            }
+        }
     }
 }
